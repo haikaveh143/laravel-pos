@@ -1,23 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>POS System</title>
-</head>
-<body>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <h1>POS System</h1>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <nav>
-        <a href="{{ route('home') }}">Home</a> |
-        <a href="{{ route('about') }}">About</a> |
-        <a href="{{ route('customers') }}">Customer Accounts</a> |
-        <a href="{{ route('users') }}">User Accounts</a>
-    </nav>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <hr>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+            <hr>
 
-    @yield('content')
+@auth
+    Logged in as: {{ auth()->user()->username }}
 
-</body>
+    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+@else
+    <a href="{{ route('login') }}">Login</a> |
+    <a href="{{ route('register') }}">Register</a>
+@endauth
+
+<hr>
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <<main>
+    @if (isset($slot))
+        {{ $slot }}
+    @else
+        @yield('content')
+    @endif
+</main>
+        </div>
+    </body>
 </html>

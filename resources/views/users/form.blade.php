@@ -41,6 +41,6 @@
         @endif
 
         <button type="submit">Save User</button>
-        <a href="{{ route('users') }}">Cancel</a>
+        <a href="{{ route('users.index') }}">Cancel</a>
     </form>
 @endsection

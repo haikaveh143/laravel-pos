@@ -31,7 +31,7 @@ class CustomerController extends Controller
 
         Customer::create($validated);
 
-        return redirect()->route('customers')
+        return redirect()->route('customers.index')
             ->with('success', 'Customer created successfully.');
     }
 
@@ -50,7 +50,7 @@ class CustomerController extends Controller
 
         $customer->update($validated);
 
-        return redirect()->route('customers')
+        return redirect()->route('customers.index')
             ->with('success', 'Customer updated successfully.');
     }
 }

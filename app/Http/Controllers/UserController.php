@@ -35,7 +35,7 @@ class UserController extends Controller
 
         User::create($validated);
 
-        return redirect()->route('users')
+        return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('users')
+        return redirect()->route('users.index')
             ->with('success', 'User updated successfully.');
     }
 }

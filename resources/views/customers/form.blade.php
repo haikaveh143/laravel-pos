@@ -36,6 +36,6 @@
         <br><br>
 
         <button type="submit">Save Customer</button>
-        <a href="{{ route('customers') }}">Cancel</a>
+        <a href="{{ route('customers.index') }}">Cancel</a>
     </form>
 @endsection
